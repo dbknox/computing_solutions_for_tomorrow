@@ -17,3 +17,5 @@ To visit Lesson 7, click [here](https://dbknox.github.io/computing_solutions_for
 
 ### ACTIVITIES:
 [Python Activity](https://dbknox.github.io/computing_solutions_for_tomorrow/Python%20Activity.html)
+
+[Python Quiz Game Activity](https://dbknox.github.io/computing_solutions_for_tomorrow/Python%20Quiz%20Game%20Activity.html)
