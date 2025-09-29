@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lesson 5 — Data, Information & The Digital World</title>
+  <meta name="description" content="Lesson 5: Data, Information & The Digital World — interactive presentation website for teaching." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#1c1c2b;--card:#25253a;--accent:#a855f7;--muted:#ede9fe;--glass:rgba(255,255,255,0.08)}
+    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{margin:0;min-height:100vh;background:linear-gradient(180deg,#120f1f 0%, #241b3a 60%);color:#faf5ff;scroll-behavior:smooth}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;position:sticky;top:0;background:rgba(28,28,43,0.9);backdrop-filter:blur(6px);z-index:50}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#6366f1);display:grid;place-items:center;font-weight:800;color:white}
+    main{max-width:1000px;margin:0 auto;padding:24px}
+    section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:40px;margin-bottom:40px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));box-shadow:0 6px 18px rgba(0,0,0,0.5)}
+    h1,h2{margin-top:0;font-size:2.2rem}
+    p,li,blockquote{font-size:1.2rem;line-height:1.6}
+    blockquote{margin:20px 0;padding:14px 20px;background:var(--glass);border-left:5px solid var(--accent)}
+    footer{text-align:center;color:var(--muted);padding:20px}
+    nav{position:fixed;bottom:20px;right:20px;display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+    nav a{padding:12px 18px;border-radius:10px;text-decoration:none;background:var(--accent);color:white;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4)}
+    .quiz{margin-top:20px;background:var(--glass);padding:18px;border-radius:10px}
+    .quiz button{margin-top:10px;padding:10px 14px;border:none;border-radius:8px;background:var(--accent);color:white;font-weight:600;cursor:pointer}
+    .quiz .feedback{margin-top:10px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">CS</div>
+      <div>
+        <div style="font-weight:700">Computing Solutions for Tomorrow</div>
+        <div class="small" style="color:var(--muted)">Lesson 5 • Data, Information & The Digital World</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="intro">
+      <h1>Lesson 5 — Data, Information & The Digital World</h1>
+      <p>Data is raw facts. Information is data organized into meaning. Computers transform data into insights that shape how we use technology every day.</p>
+    </section>
+
+    <section id="activity1">
+      <h2>Activity 1: Data Detective</h2>
+      <p>Imagine we survey the class: favorite apps, foods, or hobbies. Collecting these responses is <strong>data</strong>. Organizing them into charts or graphs turns that into <strong>information</strong>.</p>
+      <div class="quiz">
+        <p><strong>Quiz:</strong> Which of these is data, not information?</p>
+        <button onclick="feedback(this,true)">A list of student favorite apps</button><br>
+        <button onclick="feedback(this,false)">A pie chart of most popular apps</button>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <section id="activity2">
+      <h2>Activity 2: Binary Challenge</h2>
+      <p>Computers store everything in binary: 0s and 1s. For example, the letter “A” is <code>01000001</code> in binary.</p>
+      <div class="quiz">
+        <p><strong>Which of these is binary?</strong></p>
+        <button onclick="feedback(this,true)">101010</button><br>
+        <button onclick="feedback(this,false)">12345</button><br>
+        <button onclick="feedback(this,false)">ABCD</button>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <section id="reflection">
+      <h2>Reflection Prompts</h2>
+      <ul>
+        <li>What kind of data do you create every day without realizing it?</li>
+        <li>How do apps use data to make your experience personal?</li>
+      </ul>
+    </section>
+
+    <section id="wrap">
+      <h2>Wrap-Up & Transition</h2>
+      <p>Data is the fuel of computing. From social media to health trackers, understanding data helps us see how technology works.</p>
+      <p><em>Next Lesson:</em> We’ll see how computing shapes industries and careers.</p>
+    </section>
+  </main>
+
+  <nav>
+    <a href="#intro">Intro</a>
+    <a href="#activity1">Detective</a>
+    <a href="#activity2">Binary</a>
+    <a href="#reflection">Reflection</a>
+    <a href="#wrap">Wrap-Up</a>
+  </nav>
+
+  <footer>
+    <div class="small">Interactive lesson website — Lesson 5 presentation format.</div>
+  </footer>
+
+  <script>
+    function feedback(btn, correct){
+      const container = btn.parentElement.querySelector('.feedback');
+      if(correct){
+        container.textContent = "✅ Correct! That’s raw data.";
+        container.style.color = "#4ade80";
+      } else {
+        container.textContent = "❌ Not quite. That’s information, not raw data.";
+        container.style.color = "#f87171";
+      }
+    }
+
+    const sections = Array.from(document.querySelectorAll('main section'));
+    let currentIndex = 0;
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowRight'){
+        currentIndex = Math.min(currentIndex+1, sections.length-1);
+        sections[currentIndex].scrollIntoView({behavior:'smooth'});
+      } else if(e.key === 'ArrowLeft'){
+        currentIndex = Math.max(currentIndex-1, 0);
+        sections[currentIndex].scrollIntoView({behavior:'smooth'});
+      }
+    });
+  </script>
+</body>
+</html>
