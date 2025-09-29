@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lesson 2 — What Exactly Is Computer Science?</title>
+  <meta name="description" content="Lesson 2: What Exactly Is Computer Science? — interactive presentation website for teaching." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#1e1f29;--card:#2b2d3a;--accent:#06b6d4;--muted:#cbd5e1;--glass:rgba(255,255,255,0.06)}
+    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{margin:0;min-height:100vh;background:linear-gradient(180deg,#0d1a26 0%, #15263c 60%);color:#f1f5f9;scroll-behavior:smooth}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;position:sticky;top:0;background:rgba(30,31,41,0.9);backdrop-filter:blur(6px);z-index:50}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#3b82f6);display:grid;place-items:center;font-weight:800;color:white}
+    main{max-width:1000px;margin:0 auto;padding:24px}
+    section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:40px;margin-bottom:40px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));box-shadow:0 6px 18px rgba(0,0,0,0.5)}
+    h1,h2{margin-top:0;font-size:2.2rem}
+    p,li,blockquote{font-size:1.2rem;line-height:1.6}
+    blockquote{margin:20px 0;padding:14px 20px;background:var(--glass);border-left:5px solid var(--accent)}
+    footer{text-align:center;color:var(--muted);padding:20px}
+    nav{position:fixed;bottom:20px;right:20px;display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+    nav a{padding:12px 18px;border-radius:10px;text-decoration:none;background:var(--accent);color:white;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4)}
+    .quiz{margin-top:20px;background:var(--glass);padding:18px;border-radius:10px}
+    .quiz button{margin-top:10px;padding:10px 14px;border:none;border-radius:8px;background:var(--accent);color:white;font-weight:600;cursor:pointer}
+    .quiz .feedback{margin-top:10px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">CS</div>
+      <div>
+        <div style="font-weight:700">Computing Solutions for Tomorrow</div>
+        <div class="small" style="color:var(--muted)">Lesson 2 • What Exactly Is Computer Science?</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="intro">
+      <h1>Lesson 2 — What Exactly Is Computer Science?</h1>
+      <p>Computer science is the study of problem-solving using technology. It’s more than coding — it includes algorithms, data, AI, cybersecurity, and more. In this lesson, we’ll explore its scope and everyday impact.</p>
+      <div class="quiz">
+        <p><strong>Quick Check:</strong> Which of these fields is part of computer science?</p>
+        <button onclick="feedback(this,true)">Artificial Intelligence</button><br>
+        <button onclick="feedback(this,false)">Astrology</button><br>
+        <button onclick="feedback(this,false)">Cooking</button>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <section id="scavenger">
+      <h2>Computer Science Scavenger Hunt</h2>
+      <p>Look around your environment. Can you spot 5 items that rely on computer science? Examples: smartphones, gaming consoles, smart TVs, online banking apps, or even traffic lights.</p>
+      <p>This activity shows how computer science touches almost everything in daily life.</p>
+    </section>
+
+    <section id="myth">
+      <h2>Myth or Fact?</h2>
+      <p>Let’s clear up some misconceptions about computer science.</p>
+      <div class="quiz">
+        <p><em>"Computer scientists only write code."</em></p>
+        <button onclick="feedback(this,false)">True</button>
+        <button onclick="feedback(this,true)">False</button>
+        <div class="feedback"></div>
+      </div>
+      <div class="quiz">
+        <p><em>"Computer science helps solve problems in medicine, business, and art."</em></p>
+        <button onclick="feedback(this,true)">True</button>
+        <button onclick="feedback(this,false)">False</button>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <section id="reflection">
+      <h2>Reflection Prompts</h2>
+      <ul>
+        <li>Which area of computer science interests you most and why?</li>
+        <li>Think of a problem in your life that computer science could help solve. What would that look like?</li>
+      </ul>
+    </section>
+
+    <section id="wrap">
+      <h2>Wrap-Up & Transition</h2>
+      <p>Computer science is everywhere, shaping the way we live and work. By exploring its scope, we begin to see how we can apply it creatively to our own lives.</p>
+      <p><em>Next Lesson:</em> We’ll start learning the basics of coding — the language of computers!</p>
+    </section>
+  </main>
+
+  <nav>
+    <a href="#intro">Intro</a>
+    <a href="#scavenger">Hunt</a>
+    <a href="#myth">Myth/Fact</a>
+    <a href="#reflection">Reflection</a>
+    <a href="#wrap">Wrap-Up</a>
+  </nav>
+
+  <footer>
+    <div class="small">Interactive lesson website — Lesson 2 presentation format.</div>
+  </footer>
+
+  <script>
+    function feedback(btn, correct){
+      const container = btn.parentElement.querySelector('.feedback');
+      if(correct){
+        container.textContent = "✅ Correct!";
+        container.style.color = "#4ade80";
+      } else {
+        container.textContent = "❌ Not quite. Try again.";
+        container.style.color = "#f87171";
+      }
+    }
+
+    // Keyboard navigation (left/right arrows)
+    const sections = Array.from(document.querySelectorAll('main section'));
+    let currentIndex = 0;
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowRight'){
+        currentIndex = Math.min(currentIndex+1, sections.length-1);
+        sections[currentIndex].scrollIntoView({behavior:'smooth'});
+      } else if(e.key === 'ArrowLeft'){
+        currentIndex = Math.max(currentIndex-1, 0);
+        sections[currentIndex].scrollIntoView({behavior:'smooth'});
+      }
+    });
+  </script>
+</body>
+</html>
