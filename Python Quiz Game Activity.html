@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Python Project — Quiz Game</title>
+  <meta name="description" content="Build a Python quiz game project step by step — follow along using online-python.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0f172a;--card:#1e293b;--accent:#10b981;--muted:#a7f3d0;--glass:rgba(255,255,255,0.08)}
+    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{margin:0;min-height:100vh;background:linear-gradient(180deg,#0f172a 0%, #1e293b 60%);color:#f1f5f9;scroll-behavior:smooth}
+    header{padding:20px;text-align:center;background:#111827;color:#a7f3d0;position:sticky;top:0;z-index:50}
+    header h1{margin:0;font-size:2rem}
+    main{max-width:950px;margin:0 auto;padding:24px}
+    section{min-height:80vh;display:flex;flex-direction:column;justify-content:center;padding:40px;margin-bottom:40px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));box-shadow:0 6px 18px rgba(0,0,0,0.5)}
+    h2{font-size:1.8rem;margin-top:0}
+    p,li,blockquote{font-size:1.1rem;line-height:1.6}
+    blockquote{margin:20px 0;padding:14px 20px;background:var(--glass);border-left:5px solid var(--accent);overflow-x:auto}
+    a.button{display:inline-block;margin-top:20px;padding:12px 18px;border-radius:10px;text-decoration:none;background:var(--accent);color:black;font-weight:700;box-shadow:0 4px 12px rgba(0,0,0,0.4)}
+    code{background:rgba(0,0,0,0.4);padding:3px 6px;border-radius:4px;color:#facc15}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Python Project — Quiz Game</h1>
+    <p>Follow along using <a href="https://www.online-python.com/" target="_blank" style="color:#34d399;font-weight:700;">online-python.com</a></p>
+  </header>
+
+  <main>
+    <section id="intro">
+      <h2>Project Overview</h2>
+      <p>We’re building a <strong>Python Quiz Game</strong>! This project will teach you how to:</p>
+      <ul>
+        <li>Print messages to the screen</li>
+        <li>Use <code>input()</code> for interaction</li>
+        <li>Track scores with variables</li>
+        <li>Use <code>if/else</code> to check answers</li>
+      </ul>
+      <a class="button" href="https://www.online-python.com/" target="_blank">Open Online Python</a>
+    </section>
+
+    <section id="step1">
+      <h2>Step 1: Greeting the Player</h2>
+      <blockquote><code>print("🎉 Welcome to the Python Quiz Game! 🎉")<br>name = input("What's your name? ")<br>print("Hello " + name + "! Let's test your knowledge.\n")</code></blockquote>
+      <p>This welcomes the player and asks for their name.</p>
+    </section>
+
+    <section id="step2">
+      <h2>Step 2: Asking Questions</h2>
+      <blockquote><code>score = 0<br><br>print("1) What does CPU stand for?")<br>print("a) Central Processing Unit")<br>print("b) Computer Personal Unit")<br>print("c) Central Print Utility")<br>answer = input("Your answer: ").lower()<br><br>if answer == "a":<br>    print("✅ Correct!\n")<br>    score += 1<br>else:<br>    print("❌ Incorrect. The answer is a) Central Processing Unit.\n")</code></blockquote>
+      <p>Notice how we use <code>if/else</code> to check the answer.</p>
+    </section>
+
+    <section id="step3">
+      <h2>Step 3: Add More Questions</h2>
+      <p>Repeat the structure above for more questions. Here’s another example:</p>
+      <blockquote><code>print("2) Which programming language is known for the snake logo?")<br>print("a) Java")<br>print("b) Python")<br>print("c) C++")<br>answer = input("Your answer: ").lower()<br><br>if answer == "b":<br>    print("✅ Correct!\n")<br>    score += 1<br>else:<br>    print("❌ Incorrect. The answer is b) Python.\n")</code></blockquote>
+    </section>
+
+    <section id="step4">
+      <h2>Step 4: Show the Score</h2>
+      <blockquote><code>print("🎯 You scored " + str(score) + " out of 2.")<br>if score == 2:<br>    print("🏆 Excellent job, " + name + "!")<br>elif score == 1:<br>    print("👍 Good work, " + name + "!")<br>else:<br>    print("💡 Keep practicing, " + name + "! You'll get it next time.")</code></blockquote>
+      <p>This shows the player’s final score and gives feedback.</p>
+    </section>
+
+    <section id="challenge">
+      <h2>Mini Challenge</h2>
+      <p>🎯 Add a 3rd or 4th question of your own! Be creative — ask about technology, favorite foods, or fun facts.</p>
+    </section>
+
+    <section id="wrap">
+      <h2>Wrap-Up</h2>
+      <p>You’ve built a working Python quiz game! You now know how to:</p>
+      <ul>
+        <li>Print and format text</li>
+        <li>Get user input</li>
+        <li>Use <code>if/else</code> logic</li>
+        <li>Track a score</li>
+      </ul>
+      <p>Keep customizing your quiz for practice!</p>
+    </section>
+  </main>
+
+  <footer>
+    <p style="text-align:center;color:#94a3b8;">Python project website — Quiz Game activity</p>
+  </footer>
+</body>
+</html>
