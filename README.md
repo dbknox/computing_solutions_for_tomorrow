@@ -14,3 +14,6 @@ To visit Lesson 5, click [here](https://dbknox.github.io/computing_solutions_for
 To visit Lesson 6, click [here](https://dbknox.github.io/computing_solutions_for_tomorrow/Lesson%206.html).
 
 To visit Lesson 7, click [here](https://dbknox.github.io/computing_solutions_for_tomorrow/Lesson%207.html).
+
+###ACTIVITIES:
+[Python Activity](https://dbknox.github.io/computing_solutions_for_tomorrow/Python%20Activity.html)
