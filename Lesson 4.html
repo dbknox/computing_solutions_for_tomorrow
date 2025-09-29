@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lesson 4 — Algorithms & Problem-Solving</title>
+  <meta name="description" content="Lesson 4: Algorithms & Problem-Solving — interactive presentation website for teaching." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#142314;--card:#1f3320;--accent:#22c55e;--muted:#dcfce7;--glass:rgba(255,255,255,0.08)}
+    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{margin:0;min-height:100vh;background:linear-gradient(180deg,#0a160a 0%, #16301a 60%);color:#ecfdf5;scroll-behavior:smooth}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;position:sticky;top:0;background:rgba(20,35,20,0.9);backdrop-filter:blur(6px);z-index:50}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#15803d);display:grid;place-items:center;font-weight:800;color:white}
+    main{max-width:1000px;margin:0 auto;padding:24px}
+    section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:40px;margin-bottom:40px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));box-shadow:0 6px 18px rgba(0,0,0,0.5)}
+    h1,h2{margin-top:0;font-size:2.2rem}
+    p,li,blockquote{font-size:1.2rem;line-height:1.6}
+    blockquote{margin:20px 0;padding:14px 20px;background:var(--glass);border-left:5px solid var(--accent)}
+    footer{text-align:center;color:var(--muted);padding:20px}
+    nav{position:fixed;bottom:20px;right:20px;display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+    nav a{padding:12px 18px;border-radius:10px;text-decoration:none;background:var(--accent);color:white;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4)}
+    .quiz{margin-top:20px;background:var(--glass);padding:18px;border-radius:10px}
+    .quiz button{margin-top:10px;padding:10px 14px;border:none;border-radius:8px;background:var(--accent);color:white;font-weight:600;cursor:pointer}
+    .quiz .feedback{margin-top:10px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">CS</div>
+      <div>
+        <div style="font-weight:700">Computing Solutions for Tomorrow</div>
+        <div class="small" style="color:var(--muted)">Lesson 4 • Algorithms & Problem-Solving</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="intro">
+      <h1>Lesson 4 — Algorithms & Problem-Solving</h1>
+      <p>An algorithm is simply a step-by-step solution to a problem. In this lesson, we’ll discover how algorithms guide computers and people in everyday life.</p>
+    </section>
+
+    <section id="activity1">
+      <h2>Activity 1: Sorting Game</h2>
+      <p>Imagine you have a pile of mixed numbers: 8, 3, 5, 1. How could you sort them from smallest to largest?</p>
+      <div class="quiz">
+        <p><strong>Which algorithm is fastest for sorting huge data sets?</strong></p>
+        <button onclick="feedback(this,false)">Randomly swapping numbers</button><br>
+        <button onclick="feedback(this,true)">Using a systematic method like quicksort</button>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <section id="activity2">
+      <h2>Activity 2: Daily Algorithm Journal</h2>
+      <p>Think of something you did today, like brushing your teeth. Break it into steps: pick up toothbrush, apply toothpaste, brush upper teeth, brush lower teeth, rinse. That’s an algorithm!</p>
+    </section>
+
+    <section id="reflection">
+      <h2>Reflection Prompts</h2>
+      <ul>
+        <li>What’s one task you could improve by writing clearer steps?</li>
+        <li>Why do you think computers need algorithms?</li>
+      </ul>
+    </section>
+
+    <section id="wrap">
+      <h2>Wrap-Up & Transition</h2>
+      <p>Algorithms are the “thinking” behind coding. They make problem-solving structured and efficient.</p>
+      <p><em>Next Lesson:</em> We’ll explore data — the fuel that powers technology.</p>
+    </section>
+  </main>
+
+  <nav>
+    <a href="#intro">Intro</a>
+    <a href="#activity1">Sorting</a>
+    <a href="#activity2">Journal</a>
+    <a href="#reflection">Reflection</a>
+    <a href="#wrap">Wrap-Up</a>
+  </nav>
+
+  <footer>
+    <div class="small">Interactive lesson website — Lesson 4 presentation format.</div>
+  </footer>
+
+  <script>
+    function feedback(btn, correct){
+      const container = btn.parentElement.querySelector('.feedback');
+      if(correct){
+        container.textContent = "✅ Correct! Efficient algorithms matter for big data.";
+        container.style.color = "#4ade80";
+      } else {
+        container.textContent = "❌ Not quite. Random swaps aren’t efficient.";
+        container.style.color = "#f87171";
+      }
+    }
+
+    const sections = Array.from(document.querySelectorAll('main section'));
+    let currentIndex = 0;
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowRight'){
+        currentIndex = Math.min(currentIndex+1, sections.length-1);
+        sections[currentIndex].scrollIntoView({behavior:'smooth'});
+      } else if(e.key === 'ArrowLeft'){
+        currentIndex = Math.max(currentIndex-1, 0);
+        sections[currentIndex].scrollIntoView({behavior:'smooth'});
+      }
+    });
+  </script>
+</body>
+</html>
