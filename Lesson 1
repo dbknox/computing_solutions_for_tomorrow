@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lesson 1 — My Journey Into Computing</title>
+  <meta name="description" content="Lesson 1: My Journey Into Computing — interactive presentation website for teaching." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#7c3aed;--muted:#94a3b8;--glass:rgba(255,255,255,0.04)}
+    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{margin:0;min-height:100vh;background:linear-gradient(180deg,#071024 0%, #071233 60%);color:#e6eef8;scroll-behavior:smooth}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;position:sticky;top:0;background:rgba(15,23,36,0.9);backdrop-filter:blur(6px);z-index:50}
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#06b6d4);display:grid;place-items:center;font-weight:800;color:white}
+    main{max-width:1000px;margin:0 auto;padding:24px}
+    section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:40px;margin-bottom:40px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    h1,h2{margin-top:0;font-size:2.2rem}
+    p,li,blockquote{font-size:1.2rem;line-height:1.6}
+    blockquote{margin:20px 0;padding:14px 20px;background:var(--glass);border-left:5px solid var(--accent)}
+    footer{text-align:center;color:var(--muted);padding:20px}
+    nav{position:fixed;bottom:20px;right:20px;display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}
+    nav a{padding:12px 18px;border-radius:10px;text-decoration:none;background:var(--accent);color:white;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4)}
+    .quiz{margin-top:20px;background:var(--glass);padding:18px;border-radius:10px}
+    .quiz button{margin-top:10px;padding:10px 14px;border:none;border-radius:8px;background:var(--accent);color:white;font-weight:600;cursor:pointer}
+    .quiz .feedback{margin-top:10px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">CS</div>
+      <div>
+        <div style="font-weight:700">Computing Solutions for Tomorrow</div>
+        <div class="small" style="color:var(--muted)">Lesson 1 • My Journey Into Computing</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="intro">
+      <h1>Lesson 1 — My Journey Into Computing</h1>
+      <p>Computing is everywhere — from smartphones and cars to medicine and music. In this lesson, we’ll look at how curiosity about technology can turn into a journey of discovery and problem-solving.</p>
+      <div class="quiz">
+        <p><strong>Quick Check:</strong> Which of these is an example of computing in daily life?</p>
+        <button onclick="feedback(this, true)">Using GPS navigation on your phone</button><br>
+        <button onclick="feedback(this, false)">Eating breakfast</button><br>
+        <button onclick="feedback(this, false)">Brushing your teeth</button>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <section id="hook">
+      <h2>Opening Hook</h2>
+      <p>I still remember the first time I sat in front of a computer. It was slow, noisy, and nothing like the sleek devices we have now. But even then, I was amazed by what it could do. That curiosity — “How does this work?” — was the spark that started my computing journey.</p>
+      <p>Think about your own first memory of technology. Was it exciting? Confusing? Fun?</p>
+    </section>
+
+    <section id="puzzle">
+      <h2>Logic Puzzle</h2>
+      <p>Problem-solving is at the heart of computing. Let’s test that with a classic puzzle:</p>
+      <blockquote>You have two ropes that each take exactly one hour to burn, but they burn inconsistently. How can you measure exactly 45 minutes?</blockquote>
+      <details>
+        <summary>Reveal Solution</summary>
+        <p>Light Rope A at both ends and Rope B at one end. When Rope A finishes, 30 minutes have passed. Immediately light the other end of Rope B — it will finish in 15 minutes. That’s 45 minutes total.</p>
+      </details>
+    </section>
+
+    <section id="reflection">
+      <h2>Reflection Prompts</h2>
+      <p>Computing is not just about machines — it’s about people, ideas, and creativity. Reflect on these questions:</p>
+      <ul>
+        <li>When was the first time you used technology, and how did it make you feel?</li>
+        <li>Why do you want to learn more about computing? What do you hope to gain from this course?</li>
+      </ul>
+      <div class="quiz">
+        <p><strong>Interactive Poll:</strong> What excites you most about computing?</p>
+        <button onclick="pollFeedback(this,'Building apps and games')">Building apps and games</button><br>
+        <button onclick="pollFeedback(this,'Solving real-world problems')">Solving real-world problems</button><br>
+        <button onclick="pollFeedback(this,'Working with data and AI')">Working with data and AI</button>
+        <div class="feedback"></div>
+      </div>
+    </section>
+
+    <section id="wrap">
+      <h2>Wrap-Up & Transition</h2>
+      <p>Computing is a journey that begins with curiosity and grows with practice. Every expert started as a beginner, just like you. Celebrate your progress in Lesson 1!</p>
+      <p><em>Next Lesson:</em> We’ll explore what computing really means, and why it’s essential in everyday life.</p>
+    </section>
+  </main>
+
+  <nav>
+    <a href="#intro">Intro</a>
+    <a href="#hook">Hook</a>
+    <a href="#puzzle">Puzzle</a>
+    <a href="#reflection">Reflection</a>
+    <a href="#wrap">Wrap-Up</a>
+  </nav>
+
+  <footer>
+    <div class="small">Interactive lesson website — use for teaching or recording, just like slides.</div>
+  </footer>
+
+  <script>
+    function feedback(btn, correct){
+      const container = btn.parentElement.querySelector('.feedback');
+      if(correct){
+        container.textContent = "✅ Correct! GPS navigation uses computing to calculate routes.";
+        container.style.color = "#4ade80";
+      } else {
+        container.textContent = "❌ Not quite. Think of how computers process information.";
+        container.style.color = "#f87171";
+      }
+    }
+
+    function pollFeedback(btn, choice){
+      const container = btn.parentElement.querySelector('.feedback');
+      container.textContent = `👍 Great choice! You’re excited about: ${choice}.`;
+      container.style.color = "#93c5fd";
+    }
+
+    // Keyboard navigation (left/right arrows)
+    const sections = Array.from(document.querySelectorAll('main section'));
+    let currentIndex = 0;
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'ArrowRight'){
+        currentIndex = Math.min(currentIndex+1, sections.length-1);
+        sections[currentIndex].scrollIntoView({behavior:'smooth'});
+      } else if(e.key === 'ArrowLeft'){
+        currentIndex = Math.max(currentIndex-1, 0);
+        sections[currentIndex].scrollIntoView({behavior:'smooth'});
+      }
+    });
+  </script>
+</body>
+</html>
