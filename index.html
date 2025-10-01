@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Computing Solutions for Tomorrow — Curriculum Lessons 1–7</title>
+  <meta name="description" content="Complete interactive computing curriculum lessons 1–7 in website format." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    body{margin:0;background:#0f172a;color:#e2e8f0}
+    header{padding:20px;background:#1e293b;color:#f1f5f9;text-align:center;position:sticky;top:0;z-index:50}
+    header h1{margin:0;font-size:2rem}
+    nav.main-nav{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:12px}
+    /* Original Link Styling (reused for dropdown button) */
+    nav.main-nav a, .dropbtn{padding:10px 16px;border-radius:8px;text-decoration:none;background:#3b82f6;color:white;font-weight:600;box-shadow:0 2px 8px rgba(0,0,0,0.3); transition: background-color 0.2s; cursor: pointer;}
+    nav.main-nav a:hover, .dropbtn:hover{background-color: #2563eb;}
+    
+    footer{text-align:center;padding:20px;color:#94a3b8}
+
+    /* --- Dropdown Styles --- */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        margin: 0 6px; 
+    }
+    .dropbtn {
+        cursor: pointer;
+        display: block;
+        border: none;
+    }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #1e293b;
+        min-width: 250px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.6);
+        z-index: 100;
+        border-radius: 8px;
+        padding: 5px 0;
+        top: 100%;
+        left: 50%; 
+        transform: translateX(-50%);
+    }
+    .dropdown-content a {
+        color: #f1f5f9;
+        padding: 10px 20px;
+        text-decoration: none;
+        display: block;
+        font-weight: 400;
+        background: transparent;
+        box-shadow: none;
+        border-radius: 0;
+    }
+    .dropdown-content a:hover {
+        background-color: #3b82f6;
+    }
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    /* Ensure the button style is applied correctly */
+    .dropdown .dropbtn {
+        margin: 0;
+    }
+
+    /* --- Home Page Styles (New) --- */
+    main {
+        padding: 40px 20px; 
+        max-width: 1000px; 
+        margin: 0 auto;
+        text-align: center;
+    }
+    .hero-section {
+        padding: 60px 20px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #1e293b, #0f172a);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        margin-bottom: 40px;
+    }
+    .hero-section h2 {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: #e2e8f0;
+        margin-bottom: 15px;
+    }
+    .hero-section p {
+        font-size: 1.25rem;
+        color: #94a3b8;
+        max-width: 600px;
+        margin: 0 auto 30px;
+    }
+    .cta-button {
+        display: inline-block;
+        padding: 14px 28px;
+        background: #3b82f6;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        transition: background 0.3s, transform 0.1s;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.5);
+    }
+    .cta-button:hover {
+        background: #2563eb;
+        transform: translateY(-2px);
+    }
+    
+    .curriculum-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        text-align: left;
+        margin-top: 40px;
+    }
+
+    .card {
+        background: #1e293b;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        border: 1px solid #334155;
+    }
+    .card h3 {
+        font-size: 1.4rem;
+        color: #3b82f6;
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+    .card p {
+        color: #94a3b8;
+        font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Computing Solutions for Tomorrow</h1>
+    <p>Interactive Curriculum — Lessons 1 to 7</p>
+    <nav class="main-nav">
+      <!-- Added Home link - moved to the start of the nav for prominence -->
+      <a href="index.html" class="main-nav-link">Home</a>
+      <!-- Lesson Dropdown Menu -->
+      <div class="dropdown">
+        <div class="dropbtn">Lessons &darr;</div>
+        <div class="dropdown-content">
+          <!-- Links navigate to separate HTML files -->
+          <a href="Lesson 1.html">Lesson 1: My Journey Into Computing</a>
+          <a href="Lesson 2.html">Lesson 2: What Exactly Is Computer Science?</a>
+          <a href="Lesson 3.html">Lesson 3: Coding Basics</a>
+          <a href="Lesson 4.html">Lesson 4: Algorithms & Problem-Solving</a>
+          <a href="Lesson 5.html">Lesson 5: Data, Information & The Digital World</a>
+          <a href="Lesson 6.html">Lesson 6: Computing in the World</a>
+          <a href="Lesson 7.html">Lesson 7: Careers in Computing</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <h2>Unlock Your Potential in Tech</h2>
+      <p>Dive into our comprehensive interactive curriculum covering the fundamentals of computer science, coding, and future careers in the digital space.</p>
+      <a href="Lesson 1.html" class="cta-button">Start Lesson 1 Now</a>
+    </section>
+
+    <h2 style="font-size: 2rem; margin-bottom: 30px; font-weight: 700;">Curriculum Highlights</h2>
+    
+    <section class="curriculum-grid">
+      <div class="card">
+        <h3>Foundational Concepts</h3>
+        <p>Explore the history of computing and what exactly defines computer science today, setting the stage for advanced learning.</p>
+      </div>
+      <div class="card">
+        <h3>Hands-On Coding</h3>
+        <p>Get practical experience with the basics of programming, learning essential syntax and structures for building applications.</p>
+      </div>
+      <div class="card">
+        <h3>Logic and Algorithms</h3>
+        <p>Master the art of problem-solving by understanding algorithms, data structures, and computational thinking principles.</p>
+      </div>
+      <div class="card">
+        <h3>Real-World Impact</h3>
+        <p>See how computing influences global industries and the exciting career paths available in technology.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Computing Solutions for Tomorrow — Complete Curriculum</p>
+  </footer>
+</body>
+</html>
