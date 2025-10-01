@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Number Guessing Game — Lesson 4</title>
+  <meta name="description" content="Number Guessing Game activity — instructions and Python code to run on online-python.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:#0a1220;color:#e6eef8;margin:0}
+    header{padding:18px;text-align:center;background:linear-gradient(90deg,#042033,#063a5a)}
+    main{max-width:900px;margin:24px auto;padding:20px}
+    .card{background:rgba(255,255,255,0.03);padding:18px;border-radius:10px}
+    pre{background:rgba(0,0,0,0.5);padding:12px;border-radius:8px;color:#facc15}
+    a.button{display:inline-block;margin-top:12px;padding:10px 14px;border-radius:8px;background:#06b6d4;color:#021124;font-weight:700;text-decoration:none}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Number Guessing Game</h1>
+    <p>Lesson 4 — Build and run this in Python (online-python.com)</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Project Overview</h2>
+      <p>The computer chooses a random number and the player keeps guessing until they find it. This practices loops and conditionals.</p>
+
+      <h3>Full Python Code</h3>
+      <pre>import random
+
+number = random.randint(1, 20)
+tries = 0
+
+print("I'm thinking of a number between 1 and 20.")
+
+while True:
+    guess = int(input('Take a guess: '))
+    tries += 1
+    if guess < number:
+        print('Too low.')
+    elif guess > number:
+        print('Too high.')
+    else:
+        print('Correct! You guessed in', tries, 'tries.')
+        break</pre>
+
+      <a class="button" href="https://www.online-python.com/" target="_blank">Open online-python.com and paste code</a>
+
+      <h3 style="margin-top:14px">Extension</h3>
+      <p>Limit the number of tries and give the player a score. Or let them choose the difficulty range.</p>
+    </div>
+  </main>
+</body>
+</html>
