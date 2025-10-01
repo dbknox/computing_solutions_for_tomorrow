@@ -109,8 +109,8 @@
     
     .curriculum-grid {
         display: grid;
-        /* Using auto-fit allows the grid to adapt to the screen size, displaying 2 or 3 columns naturally */
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        /* Adjusted minmax width to 250px (from 280px) to ensure 3 columns fit better on smaller desktop views. */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
         text-align: left;
         margin-top: 40px;
@@ -141,8 +141,8 @@
     <h1>Computing Solutions for Tomorrow</h1>
     <p>Interactive Curriculum — Lessons 1 to 7</p>
     <nav class="main-nav">
-      <!-- Added Home link - moved to the start of the nav for prominence -->
-      <a href="index.html" class="main-nav-link">Home</a>
+      <!-- Changed Home link href to './' for reliable loading -->
+      <a href="./" class="main-nav-link">Home</a>
       <!-- Lesson Dropdown Menu -->
       <div class="dropdown">
         <div class="dropbtn">Lessons &darr;</div>
@@ -171,27 +171,27 @@
     
     <section class="curriculum-grid">
       <div class="card">
-        <h3>1. Foundational Concepts</h3>
+        <h3>Foundational Concepts</h3>
         <p>Explore the history of computing and what sparks personal interest, setting the stage for your learning journey (Lesson 1).</p>
       </div>
       <div class="card">
-        <h3>2. Defining Computer Science</h3>
+        <h3>Defining Computer Science</h3>
         <p>A deep dive into the true scope of Computer Science, separating myth from fact and identifying its everyday presence (Lesson 2).</p>
       </div>
       <div class="card">
-        <h3>3. Hands-On Coding</h3>
+        <h3>Hands-On Coding</h3>
         <p>Get practical experience with the basics of programming, learning essential syntax, structure, and how to write your first program (Lesson 3).</p>
       </div>
       <div class="card">
-        <h3>4. Logic and Algorithms</h3>
+        <h3>Logic and Algorithms</h3>
         <p>Master the art of problem-solving by understanding algorithms, step-by-step thinking, and efficient computational logic (Lesson 4).</p>
       </div>
       <div class="card">
-        <h3>5. Data & The Digital World</h3>
+        <h3>Data & The Digital World</h3>
         <p>Learn how computers store raw facts using binary (0s and 1s) and transform large quantities of data into meaningful information (Lesson 5).</p>
       </div>
       <div class="card">
-        <h3>6. Global Impact & Careers</h3>
+        <h3>Global Impact & Careers</h3>
         <p>Discover how computing shapes global industries, and explore the diverse and exciting career paths available in technology (Lessons 6 & 7).</p>
       </div>
     </section>
