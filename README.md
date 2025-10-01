@@ -6,7 +6,7 @@ Welcome to Computing Solutions for Tomorrow! This repository contains interactiv
 
 - Click on any lesson link below to view interactive content.
 - Try the activities to practice coding concepts.
-- Explore the [Master Lesson Site](https://dbknox.github.io/computing_solutions_for_tomorrow/ALL%20LESSONS.html) for the full curriculum.
+- Explore the [Master Lesson Site](https://dbknox.github.io/computing_solutions_for_tomorrow/index.html) for the full curriculum.
 
 ### 📚 Lessons
 * [Lesson 1](https://dbknox.github.io/computing_solutions_for_tomorrow/Lesson%201.html)
