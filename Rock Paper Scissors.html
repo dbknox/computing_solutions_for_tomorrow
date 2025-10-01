@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rock-Paper-Scissors — Lesson 4</title>
+  <meta name="description" content="Rock-Paper-Scissors activity — Python code and a quick in-browser demo to try." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600,700&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:#120e1a;color:#f8fafc;margin:0}
+    header{padding:18px;text-align:center;background:linear-gradient(90deg,#2b0b2b,#5b123b)}
+    main{max-width:900px;margin:24px auto;padding:20px}
+    .card{background:rgba(255,255,255,0.03);padding:18px;border-radius:10px}
+    .demo{display:flex;gap:8px;margin-top:12px}
+    button{padding:10px 12px;border-radius:8px;border:none;background:#f43f5e;color:white;cursor:pointer}
+    .out{margin-top:12px;color:#94a3b8}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Rock-Paper-Scissors</h1>
+    <p>Lesson 4 — Play the quick demo or build it in Python</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>In-Browser Demo</h2>
+      <p>Click a choice to play against the computer.</p>
+      <div class="demo">
+        <button onclick="play('rock')">Rock</button>
+        <button onclick="play('paper')">Paper</button>
+        <button onclick="play('scissors')">Scissors</button>
+      </div>
+      <div class="out" id="out"></div>
+
+      <hr style="margin:16px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)">
+      <h3>Python Version</h3>
+      <pre style="background:rgba(0,0,0,0.5);padding:12px;border-radius:8px;color:#facc15">import random
+
+choices = ['rock','paper','scissors']
+player = input('Choose rock, paper, or scissors: ').lower()
+computer = random.choice(choices)
+
+print('Computer chose', computer)
+
+if player == computer:
+    print('Tie!')
+elif (player == 'rock' and computer == 'scissors') or \
+     (player == 'scissors' and computer == 'paper') or \
+     (player == 'paper' and computer == 'rock'):
+    print('You win!')
+else:
+    print('You lose!')</pre>
+    </div>
+  </main>
+
+  <script>
+    function play(choice){
+      const choices = ['rock','paper','scissors'];
+      const comp = choices[Math.floor(Math.random()*3)];
+      const out = document.getElementById('out');
+      let result = '';
+      if(choice === comp) result = `Tie — both chose ${comp}.`;
+      else if((choice==='rock' && comp==='scissors') || (choice==='scissors' && comp==='paper') || (choice==='paper' && comp==='rock')) result = `You win! Computer chose ${comp}.`;
+      else result = `You lose — computer chose ${comp}.`;
+      out.textContent = result;
+    }
+  </script>
+</body>
+</html>
