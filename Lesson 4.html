@@ -24,10 +24,101 @@
     .quiz{margin-top:20px;background:var(--glass);padding:18px;border-radius:10px}
     .quiz button{margin-top:10px;padding:10px 14px;border:none;border-radius:8px;background:var(--accent);color:white;font-weight:600;cursor:pointer}
     .quiz .feedback{margin-top:10px;color:var(--muted)}
+
+    /* --- SHARED NAVIGATION & DROPDOWN STYLES --- */
+    .main-header-nav {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .main-header-nav a, .dropbtn{
+        padding: 10px 14px;
+        border-radius: 8px;
+        text-decoration: none;
+        background: var(--accent);
+        color: white;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        transition: background-color 0.2s; 
+        cursor: pointer;
+        display: block;
+        border: none;
+    }
+    .main-header-nav a:hover, .dropbtn:hover{
+        /* Darker shade of the Lesson 4 accent color #22c55e (emerald-500) */
+        background-color: #10b981; 
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    .dropbtn {
+        cursor: pointer;
+    }
+    /* Default state: hidden */
+    .dropdown-content {
+        display: none; 
+        position: absolute;
+        background-color: var(--card); 
+        min-width: 250px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.6);
+        z-index: 100;
+        border-radius: 8px;
+        padding: 5px 0;
+        top: 100%;
+        
+        /* Left-aligned to prevent overflow on small screens */
+        left: 0; 
+        transform: none; 
+        
+        border: 1px solid var(--glass);
+        outline: none; 
+    }
+    /* Accessible state: shown via JS .show class */
+    .dropdown-content.show {
+        display: block;
+    }
+    
+    .dropdown-content a {
+        color: #ecfdf5; 
+        padding: 10px 20px;
+        text-decoration: none;
+        display: block;
+        font-weight: 400;
+        background: transparent;
+        box-shadow: none;
+        border-radius: 0;
+    }
+    .dropdown-content a:hover, .dropdown-content a:focus { 
+        background-color: var(--accent);
+        color: black; /* Changed to black for contrast against the light accent color */
+    }
+    /* --- END SHARED NAVIGATION & DROPDOWN STYLES --- */
   </style>
 </head>
 <body>
   <header>
+    <!-- Left side: Global Navigation (Home and Dropdown) -->
+    <nav class="main-header-nav">
+      <a href="./">Home</a>
+      <div class="dropdown">
+        <!-- ACCESSIBILITY IMPROVEMENTS: Added id, role, aria-expanded/controls -->
+        <button class="dropbtn" id="lessons-menu-button" aria-expanded="false" aria-controls="lessons-menu" role="button">
+          Lessons &darr;
+        </button>
+        <div class="dropdown-content" id="lessons-menu" role="menu">
+          <a href="Lesson 1.html" role="menuitem">Lesson 1: My Journey Into Computing</a>
+          <a href="Lesson 2.html" role="menuitem">Lesson 2: What Exactly Is Computer Science?</a>
+          <a href="Lesson 3.html" role="menuitem">Lesson 3: Coding Basics</a>
+          <a href="Lesson 4.html" role="menuitem">Lesson 4: Algorithms & Problem-Solving</a>
+          <a href="Lesson 5.html" role="menuitem">Lesson 5: Data, Information & The Digital World</a>
+          <a href="Lesson 6.html" role="menuitem">Lesson 6: Computing in the World</a>
+          <a href="Lesson 7.html" role="menuitem">Lesson 7: Careers in Computing</a>
+        </div>
+      </div>
+    </nav>
+    <!-- Right side: Brand/Title -->
     <div class="brand">
       <div class="logo">CS</div>
       <div>
@@ -98,6 +189,7 @@
       }
     }
 
+    // Keyboard navigation (left/right arrows)
     const sections = Array.from(document.querySelectorAll('main section'));
     let currentIndex = 0;
     document.addEventListener('keydown', (e)=>{
@@ -108,6 +200,92 @@
         currentIndex = Math.max(currentIndex-1, 0);
         sections[currentIndex].scrollIntoView({behavior:'smooth'});
       }
+    });
+
+    // --- ACCESSIBILITY SCRIPT FOR DROPDOWN MENU ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const dropdown = document.querySelector('.dropdown');
+        const button = document.getElementById('lessons-menu-button');
+        const content = document.getElementById('lessons-menu');
+
+        if (!button || !content) return;
+
+        /**
+         * Toggles the menu state (open/close) and updates ARIA attributes.
+         * @param {boolean} [isOpen] - Explicitly set the open state.
+         */
+        function toggleMenu(isOpen) {
+            if (isOpen === undefined) {
+                isOpen = button.getAttribute('aria-expanded') === 'false';
+            }
+            button.setAttribute('aria-expanded', isOpen);
+            content.classList.toggle('show', isOpen);
+        }
+
+        // 1. Click Handler (Toggle)
+        button.addEventListener('click', () => {
+            toggleMenu();
+        });
+
+        // 2. Outside Click Handler (Close on click outside)
+        document.addEventListener('click', (event) => {
+            if (!dropdown.contains(event.target) && content.classList.contains('show')) {
+                toggleMenu(false);
+            }
+        });
+        
+        // 3. Keyboard Navigation
+        button.addEventListener('keydown', (e) => {
+            const isOpen = button.getAttribute('aria-expanded') === 'true';
+            
+            // Open menu on ArrowDown, Enter, or Space
+            if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                if (!isOpen) {
+                    toggleMenu(true);
+                }
+                
+                // Move focus to the first item
+                if (content.classList.contains('show')) {
+                    const firstLink = content.querySelector('a');
+                    if (firstLink) firstLink.focus();
+                }
+            }
+        });
+
+        content.addEventListener('keydown', (e) => {
+            const links = Array.from(content.querySelectorAll('a[role="menuitem"]'));
+            const activeElement = document.activeElement;
+            const activeIndex = links.indexOf(activeElement);
+
+            switch (e.key) {
+                case 'Escape':
+                    // Close menu and return focus to the button
+                    toggleMenu(false);
+                    button.focus();
+                    e.preventDefault();
+                    break;
+                case 'ArrowDown':
+                    e.preventDefault();
+                    // Move focus down, wrapping to the first item
+                    if (activeIndex > -1) {
+                        const nextIndex = (activeIndex + 1) % links.length;
+                        links[nextIndex].focus();
+                    } else if (links.length > 0) {
+                        links[0].focus(); // Focus first item if current focus is lost
+                    }
+                    break;
+                case 'ArrowUp':
+                    e.preventDefault();
+                    // Move focus up, wrapping to the last item
+                    if (activeIndex > 0) {
+                        links[activeIndex - 1].focus();
+                    } else if (activeIndex === 0) {
+                         links[links.length - 1].focus(); // Wrap around
+                    }
+                    break;
+            }
+        });
     });
   </script>
 </body>
