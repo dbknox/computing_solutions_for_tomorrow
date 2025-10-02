@@ -164,6 +164,26 @@
         <li>When was the first time you used technology, and how did it make you feel?</li>
         <li>Why do you want to learn more about computing? What do you hope to gain from this course?</li>
       </ul>
+      
+      <!-- ACTIVITY LINK INSERTED HERE -->
+      <div style="margin-top: 30px; text-align: center; padding: 20px; border: 2px dashed rgba(124, 58, 237, 0.5); border-radius: 10px;">
+        <p style="font-size: 1.1rem; font-weight: 600; color: #fff;">🚀 Activity: My Future Tech Goal Worksheet</p>
+        <p style="font-size: 1rem; color: var(--muted); margin-bottom: 15px;">Click below to launch your Lesson 1 assignment in a new tab.</p>
+        <a href="https://dbknox.github.io/computing_solutions_for_tomorrow/My%20Future%20Tech%20Goal%20Worksheet.html" target="_blank" style="
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            background: var(--accent); /* #7c3aed */
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(124, 58, 237, 0.4);
+            transition: background 0.3s;
+        " onmouseover="this.style.backgroundColor='#6d28d9'" onmouseout="this.style.backgroundColor='var(--accent)'">
+          Open Worksheet
+        </a>
+      </div>
+      
       <div class="quiz">
         <p><strong>Interactive Poll:</strong> What excites you most about computing?</p>
         <button onclick="pollFeedback(this,'Building apps and games')">Building apps and games</button><br>
@@ -188,7 +208,7 @@
     <a href="#wrap">Wrap-Up</a>
   </nav>
 
-  <footer style="margin-top: 40px;">
+  <footer>
     <div class="small">Interactive lesson website — use for teaching or recording, just like slides.</div>
   </footer>
 
@@ -302,7 +322,7 @@
                     if (activeIndex > 0) {
                         links[activeIndex - 1].focus();
                     } else if (activeIndex === 0) {
-                         links[links.length - 1].focus(); // Wrap around
+                        links[links.length - 1].focus(); // Wrap around
                     }
                     break;
             }
