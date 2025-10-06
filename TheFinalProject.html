@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Concept Creator: Python Prototype Final</title>
+    <!-- Embedded CSS for Game-Style Interface -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1c1c3a; /* Deep purple/blue */
+            color: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #ffcc00; /* Gold/Yellow for main title */
+            text-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+            font-size: 1.8rem;
+        }
+
+        #progress-container {
+            width: 90%;
+            max-width: 800px;
+            margin-bottom: 25px;
+        }
+
+        #progress-bar {
+            height: 25px;
+            background-color: #3a3a69;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #ffcc00;
+        }
+
+        #progress-fill {
+            height: 100%;
+            background-color: #00bcd4; /* Cyan progress fill */
+            transition: width 0.6s ease;
+            text-align: right;
+            line-height: 25px;
+            color: #1c1c3a;
+            font-weight: bold;
+            padding-right: 5px;
+            box-sizing: border-box;
+        }
+
+        .checkpoint {
+            background-color: #2a2a5e; /* Section panel color */
+            border: 3px solid #00bcd4;
+            border-radius: 12px;
+            padding: 30px;
+            width: 90%;
+            max-width: 800px;
+            margin-bottom: 20px;
+            display: none;
+            box-shadow: 0 0 20px rgba(0, 188, 212, 0.3);
+        }
+
+        .checkpoint.active {
+            display: block;
+        }
+
+        h2 {
+            color: #ff6699; /* Pink/Coral for level titles */
+            border-bottom: 2px solid #ff6699;
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+        
+        h3 {
+            color: #ffcc00;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+
+        .task-block {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #1c1c3a;
+            border-left: 5px solid #ffcc00;
+            border-radius: 5px;
+        }
+        
+        .code-submission-note {
+            background-color: #3a3a69;
+            border: 2px solid #4CAF50;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            color: #e0e0e0;
+        }
+        
+        .project-ideas {
+            background-color: #101020;
+            border: 1px dashed #00bcd4;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+        .project-ideas p {
+            margin: 5px 0;
+        }
+
+
+        .guide-tip {
+            font-style: italic;
+            color: #a0a0ff; /* Light blue for tips */
+            margin-top: 10px;
+            padding-left: 10px;
+            border-left: 3px dashed #a0a0ff;
+        }
+        
+        h4 {
+            color: #00bcd4; /* Cyan for question headers */
+            margin-top: 0;
+            font-size: 1.1rem;
+        }
+
+        textarea, input[type="text"] {
+            width: 95%;
+            padding: 12px;
+            margin-top: 8px;
+            border: 2px solid #3a3a69;
+            background-color: #101020;
+            color: #e0e0e0;
+            border-radius: 8px;
+            resize: vertical;
+            font-size: 14px;
+            font-family: 'Inter', monospace;
+        }
+        
+        textarea.code-area {
+             min-height: 250px;
+             border: 2px solid #4CAF50; /* Green border for code area */
+             font-family: 'Consolas', 'Courier New', monospace;
+             font-size: 13px;
+        }
+
+        textarea {
+            min-height: 80px;
+        }
+        
+        /* Quiz Styling */
+        .quiz-question {
+            margin-bottom: 20px;
+            border-bottom: 1px dashed #3a3a69;
+            padding-bottom: 15px;
+        }
+
+        .quiz-question p {
+            font-weight: bold;
+            color: #00bcd4;
+        }
+        .quiz-option {
+            margin: 8px 0;
+            padding: 8px;
+            background-color: #101020;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .quiz-option:hover {
+            background-color: #3a3a69;
+        }
+        .quiz-option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 5px 0 0;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            transform: translateY(-1px);
+        }
+
+        button.nav-button {
+            background-color: #00bcd4;
+        }
+
+        button.nav-button:hover {
+            background-color: #0097a7;
+        }
+
+        button.back-button {
+            background-color: #ff6699; /* Pink back button */
+        }
+
+        button.back-button:hover {
+            background-color: #e55a88;
+        }
+
+        #student-name {
+            padding: 12px;
+            width: 90%;
+            margin-bottom: 15px;
+            border: 2px solid #ffcc00;
+            background-color: #1c1c3a;
+            color: #e0e0e0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>THE CONCEPT CREATOR: PYTHON PROTOTYPE ASSIGNMENT 🐍</h1>
+        <p>Guided by Dr. Ada Logic (Lessons 1-7 Review)</p>
+    </header>
+
+    <div id="progress-container">
+        <label>Mission Status:</label>
+        <div id="progress-bar">
+            <div id="progress-fill" style="width: 0%;">0%</div>
+        </div>
+    </div>
+
+    <main id="game-interface">
+        
+        <!-- START SCREEN/NAME INPUT -->
+        <section id="start-screen" class="checkpoint active">
+            <h2>Access Terminal: Initiate Design Session</h2>
+            <p>Enter your Designer ID to begin modeling your solution.</p>
+            <input type="text" id="student-name" placeholder="Enter Your Name">
+            <button onclick="startQuest()">Start Design Session</button>
+        </section>
+
+        <!-- CHECKPOINT 1: LESSONS 1 & 2 - FOUNDATIONS -->
+        <section id="checkpoint-1" class="checkpoint" data-title="Digital Spark & Foundations">
+            <h2>LEVEL 1: Concept & Foundations (L1 & L2)</h2>
+            <div class="task-block">
+                <h4>1.1 The Problem & Inspiration (L1):</h4>
+                <p class="guide-tip">Dr. Ada Logic: "Your project should solve a small, personal problem (like calculating tip or making a playlist randomizer). What specific problem are you solving, and how does that connect to something you've learned about technology?"</p>
+                <textarea id="ans-1-1" placeholder="What problem is your prototype trying to solve, and what inspired you to choose it?"></textarea>
+            </div>
+            <div class="task-block">
+                <h4>1.2 CS Concepts & Core Idea (L2):</h4>
+                <p class="guide-tip">Dr. Ada Logic: "Remember: CS is about planning! Use Decomposition to break your project down. In computer science, decomposition is the process of breaking down a large, complex problem into smaller, more manageable, and simpler sub-problems. Why does your project need computer science?"</p>
+                <textarea id="ans-1-2" placeholder="What area of CS connects most with your project (e.g., Data, Logic), and how does your project show that CS is about thinking/planning?"></textarea>
+            </div>
+            <button onclick="completeCheckpoint(1)">Verify & Save Level 1</button>
+            <button class="nav-button" onclick="showCheckpoint(2)">Next Level &rarr;</button>
+        </section>
+
+        <!-- CHECKPOINT 2: LESSONS 3 & 4 - CODING & ALGORITHMS -->
+        <section id="checkpoint-2" class="checkpoint" data-title="Code & Algorithm Submission">
+            <h2>LEVEL 2: Python Code & Algorithm (L3 & L4)</h2>
+            <div class="code-submission-note">
+                <strong>INSTRUCTIONS:</strong> Use an external online Python editor (like <a href="https://www.online-python.com/" target="_blank" style="color:#ffcc00; text-decoration:underline;">online-python.com</a>) to build your functional prototype.
+                It must include at least one function ('def') and either a list or an if/else statement.
+            </div>
+
+            <div class="project-ideas">
+                <strong>Dr. Ada Logic's Project Ideas (Cheat Code Hints!):</strong>
+                <p>1. Quiz Master: Use a list to store questions and answers. Use if/else to check the user's input. Use def to start the quiz.</p>
+                <p>2. Metric Converter: Use 'def' for the conversion calculation (e.g., kilograms to pounds). Use if/else to choose which calculation to run based on user input.</p>
+                <p>3. Simple Password Generator: Use a list of characters (letters/numbers). Use def to run the random selection process (requires `import random`).</p>
+            </div>
+            
+            <div class="task-block">
+                <h4>2.1 Algorithm Recipe (L4):</h4>
+                <p class="guide-tip">Dr. Ada Logic: "Write your Algorithm first! Break it into 3-5 steps. (e.g., 1. Ask for input. 2. Calculate result using a function. 3. Display result.) Don't forget comments in your code to explain your logic!"</p>
+                <textarea id="ans-2-1" placeholder="Write the key steps (the algorithm) your solution follows to solve the problem."></textarea>
+            </div>
+
+            <div class="task-block">
+                <h4>2.2 Python Code Submission (L3):</h4>
+                <p class="guide-tip">Dr. Ada Logic: "Remember the basic structure (L3): `def my_function(data):` and `if score > 10: print('You Win!')`. Test your code on the online editor before pasting it here!"</p>
+                <textarea id="ans-2-2-code" class="code-area" placeholder="PASTE YOUR COMPLETE PYTHON CODE HERE."></textarea>
+            </div>
+            <button onclick="completeCheckpoint(2)">Verify & Save Level 2</button>
+            <button class="nav-button back-button" onclick="showCheckpoint(1)">&larr; Previous Level</button>
+            <button class="nav-button" onclick="showCheckpoint(3)">Next Level &rarr;</button>
+        </section>
+
+        <!-- CHECKPOINT 3: LESSON 5 - DATA -->
+        <section id="checkpoint-3" class="checkpoint" data-title="Data & Digital World">
+            <h2>LEVEL 3: Data & The Digital World (L5)</h2>
+            <div class="task-block">
+                <h4>3.1 Data Flow & Ethical Use (L5):</h4>
+                <p class="guide-tip">Dr. Ada Logic: "Your program takes raw data (like a number) and makes it information (like a final score). What input/output does your code handle? If you collect a user's name, how do you keep it private?"</p>
+                <textarea id="ans-3-1" placeholder="What raw data does your project use/create? How is it turned into useful information? How will you make sure the data is used ethically and responsibly?"></textarea>
+            </div>
+            <button onclick="completeCheckpoint(3)">Verify & Save Level 3</button>
+            <button class="nav-button back-button" onclick="showCheckpoint(2)">&larr; Previous Level</button>
+            <button class="nav-button" onclick="showCheckpoint(4)">Next Level &rarr;</button>
+        </section>
+        
+        <!-- CHECKPOINT 4: LESSONS 6 & 7 - IMPACT & CAREERS -->
+        <section id="checkpoint-4" class="checkpoint" data-title="Real-World Impact & Reflection">
+            <h2>LEVEL 4: Impact, Careers, & Reflection (L6 & L7)</h2>
+            <div class="task-block">
+                <h4>4.1 Impact, Careers, & Reflection (L6 & L7):</h4>
+                <p class="guide-tip">Dr. Ada Logic: "Think big (L6)! How would a full company use your idea? Which two jobs from Lesson 7 (e.g., App Developer, Data Analyst) would be needed? Finally (L7), what was the hardest bug you crushed while coding, and what CS topic will you research next?"</p>
+                <textarea id="ans-4-1" placeholder="Describe the real-world impact (L6) and two related careers. Reflect on a coding challenge you overcame, and state one future CS topic (L7) you want to explore."></textarea>
+            </div>
+            <button onclick="completeCheckpoint(4)">Final Level Complete & Save</button>
+            <button class="nav-button back-button" onclick="showCheckpoint(3)">&larr; Previous Level</button>
+            <button class="nav-button" onclick="showQuiz()">Start Review Quiz &rarr;</button>
+        </section>
+        
+        <!-- NEW QUIZ SECTION -->
+        <section id="quiz-review" class="checkpoint">
+            <h2>LEVEL 5: Final Review Quiz (15 Questions)</h2>
+            <h3>Test Your Knowledge: Lessons 1-7</h3>
+            <form id="review-quiz">
+                
+                <!-- Q1 (L2: Abstraction) -->
+                <div class="quiz-question" data-answer="1">
+                    <p>1. Which computing concept is the idea of hiding complex details and showing only the essential information?</p>
+                    <div class="quiz-option"><label><input type="radio" name="q1" value="1"> Abstraction</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q1" value="2"> Decomposition</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q1" value="3"> Data Flow</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q1" value="4"> Algorithm</label></div>
+                </div>
+
+                <!-- Q2 (L3: Function) -->
+                <div class="quiz-question" data-answer="3">
+                    <p>2. In Python, what is the main purpose of defining a function using the keyword `def`?</p>
+                    <div class="quiz-option"><label><input type="radio" name="q2" value="1"> To create a simple variable to store text.</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q2" value="2"> To make the program stop and ask the user a question.</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q2" value="3"> To group related code and reuse it many times easily.</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q2" value="4"> To repeat the same command over and over again.</label></div>
+                </div>
+
+                <!-- Q3 (L4: Algorithm) -->
+                <div class="quiz-question" data-answer="4">
+                    <p>3. A precise, step-by-step set of instructions for solving a problem or completing a task is called a(n):</p>
+                    <div class="quiz-option"><label><input type="radio" name="q3" value="1"> Variable</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q3" value="2"> Function</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q3" value="3"> Bug Report</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q3" value="4"> Algorithm</label></div>
+                </div>
+
+                <!-- Q4 (L5: Data vs Information) -->
+                <div class="quiz-question" data-answer="2">
+                    <p>4. Which example represents Information rather than raw Data?</p>
+                    <div class="quiz-option"><label><input type="radio" name="q4" value="1"> The number 10, 5, 8, 7.</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q4" value="2"> The average test score is 7.5/10.</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q4" value="3"> The color blue.</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q4" value="4"> The text 'Hello World'.</label></div>
+                </div>
+
+                <!-- Q5 (L2: Decomposition) -->
+                <div class="quiz-question" data-answer="1">
+                    <p>5. Breaking a large, complex problem (like building a game) into smaller, easier-to-manage sub-problems (like 'scoring' and 'movement') is known as:</p>
+                    <div class="quiz-option"><label><input type="radio" name="q5" value="1"> Decomposition</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q5" value="2"> Abstraction</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q5" value="3"> Debugging</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q5" value="4"> Indexing</label></div>
+                </div>
+                
+                <!-- Q6 (L3: Conditional) -->
+                <div class="quiz-question" data-answer="4">
+                    <p>6. If you want your Python code to choose between two different actions (A or B) based on whether a condition is True or False, you would use a(n):</p>
+                    <div class="quiz-option"><label><input type="radio" name="q6" value="1"> List</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q6" value="2"> Function (`def`)</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q6" value="3"> Variable</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q6" value="4"> `if/else` statement</label></div>
+                </div>
+
+                <!-- Q7 (L5: Binary) -->
+                <div class="quiz-question" data-answer="3">
+                    <p>7. The language computers use to store and process all data and information, consisting of only 0s and 1s, is called:</p>
+                    <div class="quiz-option"><label><input type="radio" name="q7" value="1"> Hexadecimal</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q7" value="2"> Pseudocode</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q7" value="3"> Binary</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q7" value="4"> Encryption</label></div>
+                </div>
+
+                <!-- Q8 (L7: Career) -->
+                <div class="quiz-question" data-answer="1">
+                    <p>8. Which computing career is primarily responsible for designing, testing, and writing the actual code for applications and systems?</p>
+                    <div class="quiz-option"><label><input type="radio" name="q8" value="1"> Software Engineer</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q8" value="2"> Data Analyst</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q8" value="3"> Network Administrator</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q8" value="4"> UI/UX Designer</label></div>
+                </div>
+
+                <!-- Q9 (L3: List) -->
+                <div class="quiz-question" data-answer="2">
+                    <p>9. Which Python data type is best for storing a collection of multiple items (like a list of scores or names) in a specific order?</p>
+                    <div class="quiz-option"><label><input type="radio" name="q9" value="1"> Integer</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q9" value="2"> List</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q9" value="3"> String</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q9" value="4"> Boolean</label></div>
+                </div>
+
+                <!-- Q10 (L6: Impact) -->
+                <div class="quiz-question" data-answer="4">
+                    <p>10. An AI program used to identify patterns in medical scans to help doctors diagnose diseases connects computing primarily to which real-world industry?</p>
+                    <div class="quiz-option"><label><input type="radio" name="q10" value="1"> Finance</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q10" value="2"> Entertainment</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q10" value="3"> Education</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q10" value="4"> Healthcare</label></div>
+                </div>
+
+                <!-- Q11 (L2: Field) -->
+                <div class="quiz-question" data-answer="3">
+                    <p>11. Which of the following is NOT generally considered a core field of Computer Science?</p>
+                    <div class="quiz-option"><label><input type="radio" name="q11" value="1"> Cybersecurity</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q11" value="2"> Artificial Intelligence (AI)</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q11" value="3"> Civil Engineering</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q11" value="4"> Data Science</label></div>
+                </div>
+
+                <!-- Q12 (L3: Variables) -->
+                <div class="quiz-question" data-answer="1">
+                    <p>12. What is the best way to store the user's current score in a Python program?</p>
+                    <div class="quiz-option"><label><input type="radio" name="q12" value="1"> Using a variable, like `current_score = 0`</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q12" value="2"> Creating a new function for every score change</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q12" value="3"> Printing the score directly to the screen</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q12" value="4"> Hiding the score using Abstraction</label></div>
+                </div>
+
+                <!-- Q13 (L5: Ethics) -->
+                <div class="quiz-question" data-answer="4">
+                    <p>13. Using data ethically means:</p>
+                    <div class="quiz-option"><label><input type="radio" name="q13" value="1"> Collecting as much data as possible, as fast as possible.</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q13" value="2"> Selling all collected data to other companies.</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q13" value="3"> Only using data to make more money for the company.</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q13" value="4"> Protecting user privacy and making sure the data is used fairly.</label></div>
+                </div>
+
+                <!-- Q14 (L7: Career) -->
+                <div class="quiz-question" data-answer="2">
+                    <p>14. A person who specializes in collecting, cleaning, and analyzing large datasets to find patterns and make predictions is most likely a:</p>
+                    <div class="quiz-option"><label><input type="radio" name="q14" value="1"> Cybersecurity Analyst</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q14" value="2"> Data Analyst / Scientist</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q14" value="3"> Network Engineer</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q14" value="4"> Technical Writer</label></div>
+                </div>
+
+                <!-- Q15 (L4: Bug) -->
+                <div class="quiz-question" data-answer="1">
+                    <p>15. When a programmer finds an error in their code that prevents the program from running correctly, the process of finding and fixing that error is called:</p>
+                    <div class="quiz-option"><label><input type="radio" name="q15" value="1"> Debugging</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q15" value="2"> Abstracting</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q15" value="3"> Algorithming</label></div>
+                    <div class="quiz-option"><label><input type="radio" name="q15" value="4"> Initializing</label></div>
+                </div>
+            </form>
+            
+            <button onclick="checkQuiz()">Submit Quiz & Finish Mission</button>
+            <button class="nav-button back-button" onclick="showCheckpoint(4)">&larr; Review Level 4</button>
+        </section>
+
+        <!-- FINAL SCORE SCREEN -->
+        <section id="finish-screen" class="checkpoint">
+            <h2>MISSION COMPLETE: PROTOTYPE CONCEPTS SECURED!</h2>
+            <p id="final-message">Your design session is complete. Download your full Prototype Report file below.</p>
+            <button onclick="downloadProgress()">Download Final Prototype Report</button>
+            <button class="nav-button back-button" onclick="showQuiz()">&larr; Review Quiz</button>
+        </section>
+
+    </main>
+
+    <script>
+        // --- Global Variables ---
+        let currentLevel = 0;
+        let studentName = "";
+        const totalLevels = 4; // Total conceptual levels (1-4)
+        const totalQuizQuestions = 15;
+        let quizScore = 0;
+        const completedLevels = [false, false, false, false]; 
+        const correctAnswers = { // Answers for the quiz questions
+            q1: '1', q2: '3', q3: '4', q4: '2', q5: '1', 
+            q6: '4', q7: '3', q8: '1', q9: '2', q10: '4', 
+            q11: '3', q12: '1', q13: '4', q14: '2', q15: '1'
+        };
+
+
+        // Object to store all student responses
+        let projectData = {}; 
+
+        // --- Core Functions ---
+
+        // 1. Start the Quest (Name Input & Transition)
+        function startQuest() {
+            const nameInput = document.getElementById('student-name').value.trim();
+            if (nameInput === "") {
+                displayMessage("Error", "Please enter your Designer ID to start the session.");
+                return;
+            }
+            studentName = nameInput;
+            
+            // Initialize project data structure based on the new, condensed inputs
+            projectData = {
+                name: studentName,
+                quizScore: 0, // Initialize quiz score
+                level1: { ans1_1: "", ans1_2: "" }, 
+                level2: { ans2_1: "", ans2_2_code: "" }, 
+                level3: { ans3_1: "" },             
+                level4: { ans4_1: "" }  
+            };
+
+            document.getElementById('start-screen').classList.remove('active');
+            currentLevel = 1;
+            showCheckpoint(currentLevel);
+        }
+
+        // 2. Navigation Function (Show/Hide Checkpoints)
+        function showCheckpoint(level) {
+            document.querySelectorAll('.checkpoint').forEach(cp => cp.classList.remove('active'));
+
+            let targetId;
+            if (level === 5) {
+                targetId = 'finish-screen';
+            } else if (level >= 1 && level <= totalLevels) {
+                targetId = `checkpoint-${level}`;
+                currentLevel = level;
+            } else {
+                return;
+            }
+
+            document.getElementById(targetId).classList.add('active');
+        }
+        
+        // 3. Show the Quiz Section
+        function showQuiz() {
+            document.querySelectorAll('.checkpoint').forEach(cp => cp.classList.remove('active'));
+            document.getElementById('quiz-review').classList.add('active');
+            currentLevel = 5;
+        }
+
+
+        // 4. Custom Message Box (Replaces alert())
+        function displayMessage(title, message) {
+            alert(`${title}: ${message}`);
+        }
+
+        // 5. Complete a Checkpoint (Read/Save Data and Update Progress)
+        function completeCheckpoint(level) {
+            const levelIndex = level - 1;
+            const button = document.querySelector(`#checkpoint-${level} button:first-of-type`);
+            let allFieldsFilled = true;
+
+            // --- Data Capture Logic ---
+            switch(level) {
+                case 1:
+                    projectData.level1.ans1_1 = document.getElementById('ans-1-1').value.trim();
+                    projectData.level1.ans1_2 = document.getElementById('ans-1-2').value.trim();
+                    if (!projectData.level1.ans1_1 || !projectData.level1.ans1_2) allFieldsFilled = false;
+                    break;
+                case 2:
+                    projectData.level2.ans2_1 = document.getElementById('ans-2-1').value.trim();
+                    projectData.level2.ans2_2_code = document.getElementById('ans-2-2-code').value; // Keep whitespace for code
+                    if (!projectData.level2.ans2_1 || !projectData.level2.ans2_2_code.trim()) allFieldsFilled = false;
+                    break;
+                case 3:
+                    projectData.level3.ans3_1 = document.getElementById('ans-3-1').value.trim();
+                    if (!projectData.level3.ans3_1) allFieldsFilled = false;
+                    break;
+                case 4:
+                    projectData.level4.ans4_1 = document.getElementById('ans-4-1').value.trim();
+                    if (!projectData.level4.ans4_1) allFieldsFilled = false;
+                    break;
+            }
+            
+            if (!allFieldsFilled) {
+                displayMessage("Attention!", "Please answer all guiding questions in this level before verifying (Code submission must not be empty)."); 
+                return;
+            }
+            // --- End Data Capture Logic ---
+
+
+            if (completedLevels[levelIndex] === true) {
+                displayMessage("Saved", `Level ${level} concepts updated and saved!`);
+            } else {
+                completedLevels[levelIndex] = true;
+                button.textContent = "LEVEL SECURED [CONCEPTS SAVED]";
+                button.style.backgroundColor = '#45a049';
+                updateProgressBar();
+            }
+        }
+        
+        // 6. Check Quiz Answers and Score
+        function checkQuiz() {
+            let score = 0;
+            const form = document.getElementById('review-quiz');
+            
+            for (let i = 1; i <= totalQuizQuestions; i++) {
+                const qName = `q${i}`;
+                const selected = form.querySelector(`input[name="${qName}"]:checked`);
+                
+                if (selected && selected.value === correctAnswers[qName]) {
+                    score++;
+                }
+            }
+            
+            quizScore = score;
+            projectData.quizScore = score;
+            
+            const totalConceptualLevels = completedLevels.filter(c => c).length;
+            
+            document.getElementById('final-message').innerHTML = 
+                `MISSION COMPLETE! Designer ${studentName}. <br><br> 
+                Conceptual Submissions Secured: ${totalConceptualLevels} / ${totalLevels} <br>
+                Review Quiz Score: ${quizScore} / ${totalQuizQuestions}`;
+            
+            showCheckpoint(5); // Show the final screen
+            displayMessage("Quiz Complete", `You scored ${quizScore} out of ${totalQuizQuestions} on the review quiz!`);
+        }
+
+
+        // 7. Update the visual Progress Bar
+        function updateProgressBar() {
+            const score = completedLevels.filter(c => c).length;
+            // Base progress on conceptual levels (4 total)
+            const percentage = Math.round((score / totalLevels) * 100);
+            const progressFill = document.getElementById('progress-fill');
+            
+            progressFill.style.width = `${percentage}%`;
+            progressFill.textContent = `${percentage}%`;
+        }
+
+        // 8. Download Progress/Score (Final Step)
+        function downloadProgress() {
+            const conceptualScore = completedLevels.filter(c => c).length;
+            const date = new Date().toLocaleDateString();
+
+            const reportContent = 
+`
+===================================================================
+THE CONCEPT CREATOR: FINAL PYTHON PROTOTYPE REPORT
+===================================================================
+Designer ID: ${projectData.name}
+Date Submitted: ${date}
+Conceptual Checkpoints Secured: ${conceptualScore} / ${totalLevels}
+Review Quiz Score: ${projectData.quizScore} / ${totalQuizQuestions}
+===================================================================
+
+-- LEVEL 1: CONCEPT & FOUNDATIONS (L1 & L2) --
+1.1 THE PROBLEM & INSPIRATION (L1)
+------------------------------------
+${projectData.level1.ans1_1 || 'N/A'}
+
+1.2 CS CONCEPTS & CORE IDEA (L2)
+------------------------------------
+${projectData.level1.ans1_2 || 'N/A'}
+
+
+-- LEVEL 2: PYTHON BLUEPRINT & ALGORITHM (L3 & L4) --
+2.1 THE ALGORITHM RECIPE (L4 - Step-by-Step Logic)
+---------------------------------------------------
+${projectData.level2.ans2_1 || 'N/A'}
+
+2.2 PYTHON PROTOTYPE CODE (L3 - Functional Code Submission)
+-----------------------------------------------------------
+# Code pasted from online-python.com or external editor
+# Must include a function (def) and a list or an if/else structure.
+# --- PYTHON CODE START ---
+${projectData.level2.ans2_2_code || '# No code submitted.'}
+# --- PYTHON CODE END ---
+
+
+-- LEVEL 3: DATA & THE DIGITAL WORLD (L5) --
+3.1 DATA FLOW & ETHICAL USE (L5)
+------------------------------------
+${projectData.level3.ans3_1 || 'N/A'}
+
+
+-- LEVEL 4: IMPACT, CAREERS, & REFLECTION (L6 & L7) --
+4.1 IMPACT, CAREERS, & REFLECTION (L6 & L7 Combined)
+-----------------------------------------------------
+${projectData.level4.ans4_1 || 'N/A'}
+
+==========================================================
+END OF PROTOTYPE REPORT
+==========================================================
+`;
+
+            // Create a Blob to simulate a downloadable file
+            const blob = new Blob([reportContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            
+            // Create a temporary anchor element for the download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Python_Prototype_Report_${studentName.replace(/\s/g, '_')}_${date.replace(/\//g, '-')}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            displayMessage("Success!", "Final Report Download complete! Remember to submit this file along with your working Python code file (.py).");
+        }
+    </script>
+</body>
+</html>
